@@ -1,18 +1,19 @@
 
 const
       io = require("socket.io-client"),
-      ioClient = io.connect("http://localhost:8000");
+      socket = io.connect("http://127.0.0.1:8000");
       portAudio = require('naudiodon');
       ss = require('socket.io-stream');
 var ao = new portAudio.AudioOutput({
   channelCount: 2,
   sampleFormat: portAudio.SampleFormat16Bit,
   sampleRate: 48000,
-  deviceId: 7
+  deviceId: -1
 });
+ao.on('error', err => console.error)
 
-var stream = ss.createStream();
-ss(ioClient).on('stream', function(stream){
+ss(socket).on('stream', function(stream){
   stream.pipe(ao);
-  ao.start();
+  console.log('receiving stuff')
+  ao.start()
 })

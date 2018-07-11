@@ -1,7 +1,7 @@
 const
-    io = require("socket.io"),
-    server = io.listen(8000);
     portAudio = require('naudiodon');
+    lame = require('lame');
+    express = require('express');
 
 var ai = new portAudio.AudioInput({
   channelCount: 2,
@@ -10,37 +10,30 @@ var ai = new portAudio.AudioInput({
   deviceId: 1
 });
 
-var ss = require('socket.io-stream');
+var encoder = new lame.Encoder({
+  channels: 2,
+  bitDepth: 16,
+  sampleRate: 48000,
+
+  bitRate: 128,
+  outSampleRate: 22050,
+  mode: lame.STEREO
+})
 
 
 
 ai.on('error', err => console.error);
-
-var stream = ss.createStream();
-ai.pipe(stream);
+ai.pipe(encoder);
 ai.start();
 
-let
-    sequenceNumberByClient = new Map();
+var app = express()
 
-
-// event fired every time a new client connects:
-server.on("connection", (socket) => {
-    console.info(`Client connected [id=${socket.id}]`);
-    // initialize this client's sequence number
-    sequenceNumberByClient.set(socket, 1);
-    ss(socket).emit('stream', stream)
-
-    // when socket disconnects, remove it from the list:
-    socket.on("disconnect", () => {
-        sequenceNumberByClient.delete(socket);
-        console.info(`Client gone [id=${socket.id}]`);
-    });
+app.get('/stream.mp3', function (req, res) {
+  res.set({
+    'Content-Type': 'audio/mpeg3',
+    'Transfer-Encoding': 'chunked'
+  });
+  encoder.pipe(res);
 });
 
-setInterval(() => {
-    for (const [client, sequenceNumber] of sequenceNumberByClient.entries()) {
-        client.emit("seq-num", sequenceNumber);
-        sequenceNumberByClient.set(client, sequenceNumber + 1);
-    }
-}, 1000);
+var server = app.listen(8000);
