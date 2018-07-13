@@ -1,73 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Pirate AMP</title>
-    <link rel="stylesheet" href="pirateamp.css">
 
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>Pirate AMP</title>
+  <link rel="stylesheet" href="pirateamp.css">
+  <script src='player.js'></script>
 </head>
 
 <body id="a">
   <audio id="background">
-  <source src = "http://ariczhuang.ddns.net/stream.mp3" preload='none' type="audio/mpeg">
+  <source src = "http://ariczhuang.ddns.net/stream.mp3" preload="none" type="audio/mpeg">
   </audio>
-<a onclick="play()" class="round-button">
+  <a onclick="play()" class="round-button">
     <div class="fav"><i class="fa fa-play fa-2x" style="font-size:100px"></i></div>
-</a>
-
-<script>
-var latency;
-
-function setDevice(){
-  if((navigator.userAgent.indexOf("Opera") || navigator.userAgent.indexOf('OPR')) != -1 )
-    {
-        alert('Opera');
+  </a>
+  <script>
+    if (!!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform)) {
+      document.body.style.backgroundImage = "url(https://i0.wp.com/edmreviewer.com/wp-content/uploads/2018/04/cxxxxxx.jpg?resize=1847%2C4000)";
+    } else {
+      document.body.style.backgroundImage = "url(https://i0.wp.com/edmreviewer.com/wp-content/uploads/2018/04/cxxxxxx.jpg?resize=4000%2C4000)";
     }
-    else if(navigator.userAgent.indexOf("Chrome") != -1 )
-    {
-        latency = 1.45
-    }
-    else if(navigator.userAgent.indexOf("Safari") != -1)
-    {
-        latency = 0
-    }
-    else if(navigator.userAgent.indexOf("Firefox") != -1 )
-    {
-      alert('sync not supported')
-         latency = 0
-    }
-    else if(navigator.userAgent.indexOf("Edge") > -1)
-    {
-            alert('sync not supported')
-      latency = 0
-    }
-    else if((navigator.userAgent.indexOf("MSIE") != -1 ) || (!!document.documentMode == true )) //IF IE > 10
-    {
-      alert('sync not supported')
-      alert('IE');
-    }
-    else
-    {
-            alert('sync not supported')s
-       alert('unknown');
-    }
-}
-if (!!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform)) {
-  document.body.style.backgroundImage = "url(https://i0.wp.com/edmreviewer.com/wp-content/uploads/2018/04/cxxxxxx.jpg?resize=1847%2C4000)";
-}else{
-  document.body.style.backgroundImage = "url(https://i0.wp.com/edmreviewer.com/wp-content/uploads/2018/04/cxxxxxx.jpg?resize=4000%2C4000)";
-}
-setDevice();
-function play(){
-setTimeout(function () {
-var audio = document.getElementById("background");
-audio.currentTime = latency
-audio.play()
-}, 0);
-}
-</script>
-
-
+  </script>
 </body>
+
 </html>

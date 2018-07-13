@@ -3,7 +3,5 @@
 node_modules/.bin/mime
 *.cmd
 node_modules/accepts/index.js
-node_modules/accepts/package.json
-node_modules/after/.travis.yml
-*.json
+node_modules/accepts/node_modules/after/.travis.yml
 node_modules/
