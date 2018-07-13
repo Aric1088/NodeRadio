@@ -15,8 +15,8 @@ var encoder = new lame.Encoder({
   bitDepth: 16,
   sampleRate: 48000,
 
-  bitRate: 128,
-  outSampleRate: 22050,
+  bitRate: 320,
+  outSampleRate: 48000,
   mode: lame.STEREO
 })
 
@@ -27,13 +27,18 @@ ai.pipe(encoder);
 ai.start();
 
 var app = express()
-
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+app.use(express.static("static"));
 app.get('/stream.mp3', function (req, res) {
   res.set({
-    'Content-Type': 'audio/mpeg3',
+    'Content-Type': 'audio/mpeg',
     'Transfer-Encoding': 'chunked'
   });
   encoder.pipe(res);
 });
 
-var server = app.listen(8000);
+var server = app.listen(80);

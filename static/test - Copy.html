@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Pirate AMP</title>
+    <link rel="stylesheet" href="pirateamp.css">
+
+</head>
+<!-- <audio>
+  <source src = "http://ariczhuang.ddns.net/stream.mp3" preload='none' type="audio/mpeg">
+  </audio> -->
+<body id="a">
+<a onclick="play()" class="round-button">
+    <div class="fav"><i class="fa fa-play fa-2x" style="font-size:100px"></i></div>
+</a>
+
+<script>
+var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+function play(){
+  var audioURL = "http://ariczhuang.ddns.net/stream.mp3"
+  var getStream = new XMLHttpRequest();
+  getStream.open('GET', audioURL, true);
+  getStream.responseType='arraybuffer';
+  console.log('Pressed')
+  getStream.onload = function(){
+    console.log('Obtained data')
+    audioCtx.decodeAudioData(getStream.response, function(buffer){
+      console.log('Buffered data')
+      var playSound = audioCtx.createBufferSource();
+      playSound.buffer = buffer;
+      playSound.connect(audioCtx.destination);
+      playSound.start(0);
+
+    })
+  }
+  getStream.send();
+}
+
+</script>
+
+
+</body>
+</html>
