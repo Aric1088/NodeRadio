@@ -15,17 +15,18 @@ function setDevice() {
               ? alert("IE")
               : alert("unknown")
 }
+var e = document.getElementById("background");
 function play() {
   if (!isPlaying){
   setTimeout(function() {
-    var e = document.getElementById("background");
+
     e.currentTime = seek
     e.play()
     isPlaying = true
   }, 0)
 }else{
   e.pause()
-  e.currentTime = 0
+  e.src = ''
   isPlaying = false
 }
 }
