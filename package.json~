@@ -2,14 +2,13 @@
   "name": "noderadio",
   "version": "1.0.0",
   "description": "Audio streaming application that allows playback to be synced across clients",
-  "main": "main.js",
+  "main": "server.js",
   "dependencies": {
     "electron": "^2.0.5",
-    "electron-store": "^2.0.0",
     "express": "^4.16.3",
     "lame": "^1.2.4",
-    "naudiodon": "^0.4.7",
     "node-datetime": "^2.0.6",
+    "naudiodon": "^0.4.7",
     "socket.io": "^2.1.1",
     "socket.io-stream": "^0.9.1"
   },

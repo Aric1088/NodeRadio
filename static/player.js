@@ -1,5 +1,15 @@
 var seek;
 var isPlaying = false;
+const mobileImage = "http://ariczhuang.ddns.net/mobileImage.jpg";
+const desktopImage = "http://ariczhuang.ddns.net/desktopImage.jpg";
+console.log('whyst')
+if (!!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform)) {
+
+  document.body.style.backgroundImage = "url(" + mobileImage + ")";
+} else {
+
+  document.body.style.backgroundImage = "url(" + desktopImage + ")";
+}
 function setDevice() {
   -1 != (navigator.userAgent.indexOf("Opera") || navigator.userAgent.indexOf("OPR"))
     ? alert("Opera")

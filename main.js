@@ -1,55 +1,95 @@
-const {app, BrowserWindow} = require('electron')
-const path = require('path')
-const url = require('url')
+var app = require('electron').app;
+var Window = require('electron').BrowserWindow; // jshint ignore:line
+var Tray = require('electron').Tray; // jshint ignore:line
+var Menu = require('electron').Menu; // jshint ignore:line
+var fs = require('fs');
+var path = require('path');
+var url = require('url');
 
-// Keep a global reference of the window object, if you don't, the window will
-// be closed automatically when the JavaScript object is garbage collected.
-let win
+var server = require(path.join(__dirname, 'server.js'));
 
-function createWindow () {
-  // Create the browser window.
-  win = new BrowserWindow({width: 800, height: 600})
+var mainWindow = null;
 
-  // and load the index.html of the app.
-  win.loadURL(url.format({
+app.on('ready', function () {
+    'use strict';
+
+
+    var iconPath = path.resolve(__dirname, 'pirate.ico');
+    const appIcon = new Tray(iconPath);
+    mainWindow = new Window({
+        width: 1280,
+        height: 1024,
+        autoHideMenuBar: false,
+        useContentSize: true,
+        resizable: true,
+        icon: iconPath
+        //  'node-integration': false // otherwise various client-side things may break
+    });
+    appIcon.setToolTip('Pirate AMP');
+    mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'index.html'),
     protocol: 'file:',
     slashes: true
   }))
+  // mainWindow.loadURL('http://localhost:80/');
 
-  // Open the DevTools.
-  win.webContents.openDevTools()
+    // remove this for production
+    var template = [
+        {
+            label: 'View',
+            submenu: [
+                {
+                    label: 'Reload',
+                    accelerator: 'CmdOrCtrl+R',
+                    click: function(item, focusedWindow) {
+                        if (focusedWindow) {
+                            focusedWindow.reload();
+                        }
+                    }
+                },
+                {
+                    label: 'Toggle Full Screen',
+                    accelerator: (function() {
+                        if (process.platform === 'darwin') {
+                            return 'Ctrl+Command+F';
+                        } else {
+                            return 'F11';
+                        }
+                    })(),
+                    click: function(item, focusedWindow) {
+                        if (focusedWindow) {
+                            focusedWindow.setFullScreen(!focusedWindow.isFullScreen());
+                        }
+                    }
+                },
+                {
+                    label: 'Toggle Developer Tools',
+                    accelerator: (function() {
+                        if (process.platform === 'darwin') {
+                            return 'Alt+Command+I';
+                        } else {
+                            return 'Ctrl+Shift+I';
+                        }
+                    })(),
+                    click: function(item, focusedWindow) {
+                        if (focusedWindow) {
+                            focusedWindow.toggleDevTools();
+                        }
+                    }
+                },
+            ]
+        }
+    ];
 
-  // Emitted when the window is closed.
-  win.on('closed', () => {
-    // Dereference the window object, usually you would store windows
-    // in an array if your app supports multi windows, this is the time
-    // when you should delete the corresponding element.
-    win = null
-  })
-}
+    var menu = Menu.buildFromTemplate(template);
+    Menu.setApplicationMenu(menu);
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
-app.on('ready', createWindow)
+    mainWindow.focus();
 
-// Quit when all windows are closed.
-app.on('window-all-closed', () => {
-  // On macOS it is common for applications and their menu bar
-  // to stay active until the user quits explicitly with Cmd + Q
-  if (process.platform !== 'darwin') {
-    app.quit()
-  }
-})
+});
 
-app.on('activate', () => {
-  // On macOS it's common to re-create a window in the app when the
-  // dock icon is clicked and there are no other windows open.
-  if (win === null) {
-    createWindow()
-  }
-})
-
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.
+// shut down all parts to app after windows all closed.
+app.on('window-all-closed', function () {
+    'use strict';
+    app.quit();
+});

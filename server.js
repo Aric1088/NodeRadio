@@ -1,7 +1,10 @@
+(function (){
+const Store = require('electron-store');
 const portAudio = require('naudiodon');
 const lame = require('lame');
 const express = require('express');
 const datetime = require('node-datetime');
+const path = require('path');
 var app = express()
 var connectionLog = {}
 var ai = new portAudio.AudioInput({
@@ -10,7 +13,7 @@ var ai = new portAudio.AudioInput({
   sampleRate: 48000,
   deviceId: 1
 });
-encoder = new lame.Encoder({
+var encoder = new lame.Encoder({
   channels: 2,
   bitDepth: 16,
   sampleRate: 48000,
@@ -38,7 +41,7 @@ app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
-app.use(express.static("static"));
+app.use(express.static(path.join(__dirname, "static")));
 app.get('/stream.mp3', function(req, res) {
   var ip = (req.headers['x-forwarded-for'] || req.connection.remoteAddress);
   var dt = datetime.create(Date.now());
@@ -49,5 +52,16 @@ app.get('/stream.mp3', function(req, res) {
   });
   encoder.pipe(res);
 });
-
-var server = app.listen(80);
+const store = new Store();
+var server;
+if (store.get('port') !== undefined){
+  console.log('helo')
+  console.log(store.get('port'))
+  server = app.listen(store.get('port'));
+}else{
+  console.log('whomst')
+  store.set('port', 80);
+  server = app.listen(80);
+}
+module.exports = server;
+}());
