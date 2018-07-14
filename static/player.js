@@ -1,5 +1,5 @@
 var seek;
-var isPlaying = False;
+var isPlaying = false;
 function setDevice() {
   -1 != (navigator.userAgent.indexOf("Opera") || navigator.userAgent.indexOf("OPR"))
     ? alert("Opera")
@@ -21,12 +21,12 @@ function play() {
     var e = document.getElementById("background");
     e.currentTime = seek
     e.play()
-    isPlaying = True
+    isPlaying = true
   }, 0)
 }else{
   e.pause()
   e.currentTime = 0
-  isPlaying = False
+  isPlaying = false
 }
 }
 setDevice();
