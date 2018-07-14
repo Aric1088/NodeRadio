@@ -19,12 +19,13 @@ var e = document.getElementById("background");
 function play() {
   if (!isPlaying){
   setTimeout(function() {
-
-    e.currentTime = seek
-    e.play()
+var e = document.getElementById("background");
+    e.currentTime = seek;
+        e.play()
     isPlaying = true
   }, 0)
 }else{
+  var e = document.getElementById("background");
   e.pause()
   e.src = ''
   isPlaying = false
