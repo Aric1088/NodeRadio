@@ -1,5 +1,5 @@
 var seek;
-var isPlaying;
+var isPlaying = False;
 function setDevice() {
   -1 != (navigator.userAgent.indexOf("Opera") || navigator.userAgent.indexOf("OPR"))
     ? alert("Opera")
@@ -26,6 +26,7 @@ function play() {
 }else{
   e.pause()
   e.currentTime = 0
+  isPlaying = False
 }
 }
 setDevice();
