@@ -1,41 +1,14 @@
-<html lang="en">
-<head>
+<!DOCTYPE html>
+<html>
+  <head>
     <meta charset="UTF-8">
-    <title>Audio player</title>
-</head>
-<body>
-
-<div id="container" style="width: 400px; margin: 0 auto;">
-    <h2>Pirate Amp Development</h2>
-</div>
-<button onclick='play()'>Play</button>
-
-<script>
-function play(){
-var delay = 0
-setTimeout(function () {
-var audio = document.getElementById("stream");
-if (!!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform)) {
-  audio.currentTime = 0
-  audio.play();
-// }else if (navigator.userAgent.search("Firefox") > -1) {
-//   console.log('firefox detected')
-//   setTimeout(function(){
-//      audio.currentTime = 0.40
-//       console.log('delay')
-//         audio.play();
-//   }, 4115);
-
-}else{
-  audio.currentTime = 1.45
-    audio.play();
-}
-
-}, delay);
-
-}
-</script>
-
-
-</body>
+    <title>PirateAmp</title>
+    <link href='static/pirateamp.css' rel='stylesheet'>
+    <link href='static/index.html'>
+  </head>
+  <body>
+    <div id='root' />
+    <script src='static/player.js' type='text/javascript'></script>
+    <script src='static/server.js' type='text/javascript'></script>
+  </body>
 </html>
