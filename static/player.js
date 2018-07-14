@@ -20,6 +20,7 @@ function play() {
   if (!isPlaying){
   setTimeout(function() {
 var e = document.getElementById("background");
+e.src = "http://ariczhuang.ddns.net/stream.mp3"
     e.currentTime = seek;
         e.play()
     isPlaying = true
