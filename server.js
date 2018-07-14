@@ -1,8 +1,9 @@
 const portAudio = require('naudiodon');
 const lame = require('lame');
 const express = require('express');
+const datetime = require('node-datetime');
 var app = express()
-var connectionLog = []
+var connectionLog = {}
 var ai = new portAudio.AudioInput({
   channelCount: 2,
   sampleFormat: portAudio.SampleFormat16Bit,
@@ -26,8 +27,8 @@ function initializeStream(input, output) {
 initializeStream(ai, encoder);
 app.get('/analytics', function(req, res) {
   let result = '<table>';
-  for (var i = 0; i < connectionLog.length; i++) {
-    result += "<tr><td>" + connectionLog[i] + "</td><td>";
+  for (const [key, value] of Object.entries(connectionLog)) {
+    result += "<tr><td>[" + key + "]</td><td>" + value + " connected.<td></tr>";
   }
   result += '</table>';
   res.send(result)
@@ -39,8 +40,9 @@ app.use(function(req, res, next) {
 });
 app.use(express.static("static"));
 app.get('/stream.mp3', function(req, res) {
-  var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-  connectionLog.push(ip)
+  var ip = (req.headers['x-forwarded-for'] || req.connection.remoteAddress);
+  var dt = datetime.create(Date.now());
+  connectionLog[dt.format('m/d/Y H:M:S')] = ip.substring(7);
   res.set({
     'Content-Type': 'audio/mpeg',
     'Transfer-Encoding': 'chunked'
