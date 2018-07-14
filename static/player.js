@@ -20,12 +20,14 @@ function play() {
   if (!isPlaying){
   setTimeout(function() {
 var e = document.getElementById("background");
+document.getElementById("player").className = "fa fa-pause"
 e.src = "http://ariczhuang.ddns.net/stream.mp3"
     e.currentTime = seek;
         e.play()
     isPlaying = true
   }, 0)
 }else{
+  document.getElementById("player").className = "fa fa-play fa-2x"
   var e = document.getElementById("background");
   e.pause()
   e.src = ''
