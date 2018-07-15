@@ -1,7 +1,8 @@
 var seek;
+var host = "ariczhuang.ddns.net:80"
 var isPlaying = false;
-const mobileImage = "http://ariczhuang.ddns.net/mobileImage.jpg";
-const desktopImage = "http://ariczhuang.ddns.net/desktopImage.jpg";
+const mobileImage = "http://" + host + "/mobileImage.jpg";
+const desktopImage = "http://" + host + "/desktopImage.jpg";
 console.log('whyst')
 if (!!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform)) {
 
@@ -32,7 +33,7 @@ function play() {
 var e = document.getElementById("background");
 document.getElementById("player").className = "fa fa-pause"
 document.getElementById("player").style.marginLeft = "-12px";
-e.src = "http://ariczhuang.ddns.net/stream.mp3"
+e.src = "http://ariczhuang.ddns."net"/stream.mp3"
     e.currentTime = seek;
         e.play()
     isPlaying = true
