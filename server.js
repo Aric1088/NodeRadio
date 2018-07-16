@@ -7,11 +7,19 @@ const datetime = require('node-datetime');
 const path = require('path');
 var app = express()
 var connectionLog = {}
+const store = new Store();
+var deviceID;
+if (store.get('deviceID') !== undefined){
+  deviceID = app.listen(store.get('deviceID'));
+}else{
+  deviceID = 1
+  store.set('deviceID', 1);
+}
 var ai = new portAudio.AudioInput({
   channelCount: 2,
   sampleFormat: portAudio.SampleFormat16Bit,
   sampleRate: 48000,
-  deviceId: 1
+  deviceId: deviceID
 });
 var encoder = new lame.Encoder({
   channels: 2,
@@ -51,8 +59,7 @@ app.get('/stream.mp3', function(req, res) {
     'Transfer-Encoding': 'chunked'
   });
   encoder.pipe(res);
-});
-const store = new Store();
+})
 var server;
 if (store.get('port') !== undefined){
   console.log('helo')
