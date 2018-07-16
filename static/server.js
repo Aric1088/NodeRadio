@@ -50,7 +50,7 @@ app.use(function(req, res, next) {
   next();
 });
 app.use(express.static(path.join(__dirname, "static")));
-app.get('/stream.mp3', function(req, res) {
+app.get('/stream', function(req, res) {
   var ip = (req.headers['x-forwarded-for'] || req.connection.remoteAddress);
   var dt = datetime.create(Date.now());
   connectionLog[dt.format('m/d/Y H:M:S')] = ip.substring(7);
