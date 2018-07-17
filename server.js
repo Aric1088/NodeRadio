@@ -66,7 +66,9 @@ if (store.get('port') !== undefined){
   console.log(store.get('port'))
   server = app.listen(store.get('port'));
 }else{
+  console.log('whomst')
   store.set('port', 80);
+  console.log('server has started')
   server = app.listen(80);
 }
 module.exports = server;

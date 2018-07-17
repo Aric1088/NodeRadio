@@ -8,3 +8,4 @@ node_modules/
 *.dll
 *.pak
 PirateAmp-win32-x64/icudtl.dat
+*dist/

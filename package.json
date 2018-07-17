@@ -1,5 +1,5 @@
 {
-  "name": "noderadio",
+  "name": "PirateAMP",
   "version": "1.0.0",
   "description": "Audio streaming application that allows playback to be synced across clients",
   "main": "main.js",
@@ -21,7 +21,9 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cross-env ENV=development electron ."
+    "start": "cross-env ENV=development electron .",
+    "build": "electron-packager . app --platform win32 --arch x64 --out dist/",
+    "setup": "electron-installer-windows --src dist/app-win32-x64/ --dest dist/installers/"
   },
   "repository": {
     "type": "git",

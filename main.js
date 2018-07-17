@@ -1,12 +1,12 @@
 var app = require('electron').app;
-var Window = require('electron').BrowserWindow; 
+var Window = require('electron').BrowserWindow;
 var Tray = require('electron').Tray;
 var Menu = require('electron').Menu;
 var fs = require('fs');
 var path = require('path');
 var url = require('url');
 
-var server = require(path.join(__dirname, 'static', 'server.js'));
+var server = require(path.join(__dirname, 'server.js'));
 
 var mainWindow = null;
 
@@ -14,7 +14,7 @@ app.on('ready', function () {
     'use strict';
 
 
-    var iconPath = path.resolve(__dirname, 'static','pirate.ico');
+    var iconPath = path.resolve(__dirname, 'static', 'pirate.ico');
     const appIcon = new Tray(iconPath);
     mainWindow = new Window({
         width: 1280,
@@ -27,7 +27,7 @@ app.on('ready', function () {
     });
     appIcon.setToolTip('Pirate AMP');
     mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'static', 'app.html'),
+    pathname: path.join(__dirname, 'app.html'),
     protocol: 'file:',
     slashes: true
   }))
