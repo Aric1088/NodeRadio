@@ -5,3 +5,7 @@ node_modules/.bin/mime
 node_modules/accepts/index.js
 node_modules/accepts/node_modules/after/.travis.yml
 node_modules/
+*.dll
+*.pak
+PirateAmp-win32-x64/icudtl.dat
+*dist/

@@ -1,5 +1,6 @@
 var seek;
-var isPlaying = false;
+var host = "ariczhuang.ddns.net:80"
+var isPlaying = !1;
 function setDevice() {
   -1 != (navigator.userAgent.indexOf("Opera") || navigator.userAgent.indexOf("OPR"))
     ? alert("Opera")
@@ -15,26 +16,28 @@ function setDevice() {
               ? alert("IE")
               : alert("unknown")
 }
+navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform)
+  ? document.body.style.backgroundImage = "url(mobileImage.jpg)"
+  : document.body.style.backgroundImage = "url(desktopImage.jpg)";
 var e = document.getElementById("background");
 function play() {
-  if (!isPlaying){
-  setTimeout(function() {
-var e = document.getElementById("background");
-document.getElementById("player").className = "fa fa-pause"
-document.getElementById("player").style.marginLeft = "-12px";
-e.src = "http://ariczhuang.ddns.net/stream.mp3"
-    e.currentTime = seek;
-        e.play()
-    isPlaying = true
-  }, 0)
-}else{
-  var p = document.getElementById("player")
-  document.getElementById("player").className = "fa fa-play fa-2x"
-  document.getElementById("player").style.marginLeft = "0px";
-  var e = document.getElementById("background");
-  e.pause()
-  e.src = ''
-  isPlaying = false
-}
+  if (isPlaying) {
+    document.getElementById("player");
+    document.getElementById("player").className = "fa fa-play fa-2x",
+    document.getElementById("player").style.marginLeft = "0px";
+    var e = document.getElementById("background");
+    e.pause(),
+    e.src = "",
+    isPlaying = !1
+  } else
+    setTimeout(function() {
+      var e = document.getElementById("background");
+      document.getElementById("player").className = "fa fa-pause",
+      document.getElementById("player").style.marginLeft = "-12px",
+      e.src = "http://" + host + "/stream",
+      e.currentTime = seek,
+      e.play(),
+      isPlaying = !0
+    }, 0)
 }
 setDevice();
