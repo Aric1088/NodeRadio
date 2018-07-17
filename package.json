@@ -9,12 +9,12 @@
     "express": "^4.16.3",
     "lame": "^1.2.4",
     "naudiodon": "^0.4.7",
-    "node-datetime": "^2.0.6",
+    "node-datetime": "^2.0.6"
   },
   "devDependencies": {
     "cross-env": "^5.2.0",
     "electron-packager": "^12.1.0",
-    "electron-rebuild": "^1.8.1",
+    "electron-rebuild": "^1.8.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
