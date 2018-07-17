@@ -27,7 +27,7 @@
     "url": "git+https://github.com/Aric1088/NodeRadio.git"
   },
   "author": "Aric Zhuang",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/Aric1088/NodeRadio/issues"
   },
