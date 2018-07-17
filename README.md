@@ -32,7 +32,7 @@ A step by step series of examples that tell you how to get a development env run
 To modify these settings/open the server up to external connections, you must edit the configurations.json file.
 On Windows, this will be found in the %appdata% directory.
 On Mac and Linux, this will be in your default application data folder.
-5. After configuring the correct port, you can change the ip address of the stream by going to the player.js file in the static/ folder.
+5. After configuring the correct port, you can change the host address of the stream(var host) by going to the player.js file in the static/ folder.
 6. The static folder is what the server will be serving to any clients that connect, so feel free to customize anything you want, including the background images and css styling!
 7. In order for the server to stream audio, it requires an input audio source to read from. This could be a microphone device, or a virtual sound driver that captures system audio.
 8. For Windows, I recommend Virtual Cable Audio; it works really well and is easy to setup: https://www.vb-audio.com/Cable/
