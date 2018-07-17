@@ -62,7 +62,6 @@ app.get('/stream', function(req, res) {
 })
 var server;
 if (store.get('port') !== undefined){
-  console.log('helo')
   console.log(store.get('port'))
   server = app.listen(store.get('port'));
 }else{
