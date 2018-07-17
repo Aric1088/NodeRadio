@@ -26,7 +26,7 @@ The latest version of the Node runtime environment: [Download](https://nodejs.or
 A step by step series of examples that tell you how to get a development env running
 
 1. Clone the repository to a folder
-2. Execute "npm start", this will start the electron app
+2. Execute "npm run start", this will start the electron app
 3. In the case that any dependencies are missing, run "npm install"
 4. The server will by default host itself on localhost, port 80.
 To modify these settings/open the server up to external connections, you must edit the configurations.json file.
