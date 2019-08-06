@@ -1,3 +1,5 @@
+# This REPO is being deprecated in favor of a new one:
+[Link](https://github.com/Aric1088/NodeAudioSync)
 # NodeRadio - Live Music Streaming Server 
 
 - Supports Synced Playback Across Multiple Clients*
