@@ -1,5 +1,6 @@
 # This REPO is being deprecated in favor of a new one:
-[NEW REPO](https://github.com/Aric1088/NodeAudioSync)
+The project is now named Party-ify
+[NEW REPO](https://github.com/Aric1088/Party-ify)
 # NodeRadio - Live Music Streaming Server 
 
 - Supports Synced Playback Across Multiple Clients*
